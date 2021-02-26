@@ -1,0 +1,68 @@
+@startuml Domænemodel
+frame "dom Pantry Passion" {
+skinparam classAttributeIconSize 0
+hide circle
+hide stereotype
+hide empty fields
+hide empty methods
+hide footbox
+
+mix_Actor "Bruger" as Bruger
+mix_Actor "Kamera" as Kamera
+mix_Actor "Vare" as Vare
+
+class "Database" as Database {
+Varedata
+Brugernavn
+Adgangskode
+}
+
+class "Varedata" as Varedata {
+Stregkode
+Navn
+Holdbarhedsdato
+Antal
+}
+
+
+class "GUI" as GUI {
+Hovedmenu
+Tilføj Vare
+Fjern Vare
+Ret Vare
+}
+
+class "Besked" as Besked {
+Hovedmenu
+Tilføj Vare
+Fjern Vare
+Ret Vare
+}
+
+class "KategoriValgmuligheder" as KategoriValgmuligheder {
+Alle
+Fryser
+Køleskab
+Spisekammer
+Indkøbsliste
+}
+
+Varedata -- KategoriValgmuligheder :> Har
+
+Bruger -- Vare : > Skanner
+
+Vare -- Kamera: > Skannes 
+
+Database -- Varedata: > Indeholder
+
+GUI -- Database : > benytter
+
+GUI -- Kamera : < Sender stregkode
+
+GUI -- Besked : > Viser
+
+Besked -- Bruger : < Ser
+
+Bruger -- GUI : > Interagerer
+}
+@enduml
